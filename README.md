@@ -2,6 +2,41 @@
 Self-Driving Car Engineer Nanodegree Program
 
 ---
+## Introduction
+
+This Repository includes C ++ codes for Udacity's PID control project of the Self Driving Car Course. This task was implemented to partially fulfill Term-II goals of Udacity's self driving car Nano degree program.
+
+## PID Control
+
+PID is an acronym for the mathematical terms Proportional, Integral, and Derivative. Proportional means a constant multiple. A number is said to be a proportion to another if there exists a constant n such that y = nx. This n can be positive or negative, greater or less than one. To make the formula more accurate by PID controller standards, proportion is given by KP and the x term is the control loop error     ε: y = KP(ε).
+
+The term Integral means the summation of a function over a given interval. In the case of controller PID that is the sum of error over time: y = ∫f (ε)dt.
+
+Finally, Derivative is the rate of change during a given interval. Interpreted by a PID controller: y =  d(ε)/dt
+
+All three of these PID controller components create output based on measured error of the process being regulated. If a control loop functions properly, any changes in error caused by setpoint changes or process disturbances are quickly eliminated by the combination of the three factors P, I, and D. [click here for more info](https://www.thorlabs.com/tutorials.cfm?tabID=5dfca308-d07e-46c9-baa0-4defc5c40c3e) or [here](https://en.wikipedia.org/wiki/PID_controller)
+
+## Effects of PID Controls On Car
+
+Proportional Component (P) :The proportional term aims to reduce the error by multiplying the error(CTE) coming from the system by a constant (Kp).  
+
+P = Kp * CTE 
+
+Integral Component (D) : Integral means finding the area of the error. In each dt cycle, the error is added by multiplying by the coefficient (Ki). It is necessary to limit it to prevent the integral from rising too high. 
+
+I = I + (Ki * CTE * dt)
+
+Differential Component (D) : It shows the effect in direct proportion with the change of error. 
+
+D = (Kd * HD)/dt (HD = currentCTE -priviousCTE)
+
+PID = P + I + D
+
+*CTE: the cross track error
+
+## Tuning The Parameters
+
+I first set the parameters manually. You can access the related methods from the links that. [here](https://www.thorlabs.com/tutorials.cfm?tabID=5dfca308-d07e-46c9-baa0-4defc5c40c3e) or [here](https://robotics.stackexchange.com/questions/167/what-are-good-strategies-for-tuning-pid-loops) As a result of manual adjustment, I obtained the coefficients [-0.12, 0, -1.2] for Kp, Ki, Kd. Then I programmed the twiddle () algorithm in C ++ and implemented it for the first part of the path. As a result, I obtained the coefficients [-0.12, 0, -2.7]. You can watch one tour of the car on the track from the video that I put in the repository[result.mp4](https://github.com/coder52/CarND-PID-Control-Project/blob/master/result.mp4). 
 
 ## Dependencies
 
