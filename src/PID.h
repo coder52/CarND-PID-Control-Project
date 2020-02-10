@@ -1,6 +1,10 @@
 #ifndef PID_H
 #define PID_H
 
+#include <vector>
+
+using std::vector;
+
 class PID {
  public:
   /**
@@ -17,7 +21,7 @@ class PID {
    * Initialize PID.
    * @param (Kp_, Ki_, Kd_) The initial PID coefficients
    */
-  void Init(double Kp_, double Ki_, double Kd_);
+  void Init();
 
   /**
    * Update the PID error variables given cross track error.
@@ -31,6 +35,25 @@ class PID {
    */
   double TotalError();
 
+  /**
+   * reset the simulator and car.
+   */
+  void Restart(uWS::WebSocket<uWS::SERVER> ws);
+
+  /**
+   * run twiddle.
+   */
+  void Twiddle();
+
+  /**
+   * Twiddle parameters
+   */
+  int slct;
+  double best_err;
+  vector <double> p;
+  vector <double> dp;
+  double err;
+
  private:
   /**
    * PID Errors
@@ -38,13 +61,6 @@ class PID {
   double p_error;
   double i_error;
   double d_error;
-
-  /**
-   * PID Coefficients
-   */ 
-  double Kp;
-  double Ki;
-  double Kd;
 };
 
 #endif  // PID_H
